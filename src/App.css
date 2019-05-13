@@ -1,0 +1,81 @@
+body {
+	padding: 30px;
+}
+
+.column {
+	padding: 2px;
+	height: 20px;
+	display: inline-block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.spinner {
+	width: 100px;
+	height: 100px;
+}
+
+#header {
+	font-weight: bold;
+}
+
+#participant {
+	width: 150px;
+}
+
+#controls {
+	align-items: center;
+	text-align: center;
+}
+
+#controls input {
+	width: 50px;
+}
+
+#tradetype {
+	width: 80px;
+}
+
+#peaktype {
+	width: 80px;
+}
+
+#hedgetype {
+	width: 100px;
+}
+
+#source {
+	width: 150px;
+}
+
+#sink {
+	width: 150px;
+}
+
+#size {
+	width: 50px;
+	text-align: right;
+}
+
+#cost {
+	width: 90px;
+	text-align: right;
+}
+#revenue {
+	width: 90px;
+	text-align: right;
+}
+#profit {
+	width: 90px;
+	text-align: right;
+}
+
+@keyframes App-logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
