@@ -11,6 +11,11 @@ body {
 	overflow: hidden;
 }
 
+#list {
+	height: 500px;
+	overflow-y: scroll;
+}
+
 .spinner {
 	width: 100px;
 	height: 100px;
@@ -55,7 +60,7 @@ body {
 
 #size {
 	width: 50px;
-	text-align: right;
+	text-align: left;
 }
 
 #cost {

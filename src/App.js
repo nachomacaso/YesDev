@@ -8,17 +8,13 @@ import { Row, Header } from './Row';
 import { ControlBar } from './ControlBar';
 import { Spinner } from './Spinner';
 
-const PAGESIZE = 20;
-
-const List = ({ data }) => data.map((item, index) => <Row item={item} />);
+const List = ({ data }) => data.map((item, index) => <Row data={data} item={item} />);
 
 function App() {
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(false);
-	const [page, setPage] = useState(1);
 	const [sort, setSort] = useState('CONTRACTSIZE,PARTICIPANTFULLNAME');
 	const sortFunc = multiSort(sort.split(','));
-	const pageData = data.sort(sortFunc).slice((page - 1) * PAGESIZE, page * PAGESIZE);
 	useEffect(() => {
 		async function fetchData() {
 			setLoading(true);
@@ -29,22 +25,19 @@ function App() {
 		}
 		fetchData();
 	}, []);
+	console.log(data.length);
 	return (
 		<>
 			<Card id="table">
 				<CardActions id="controls">
-					<ControlBar
-						page={page}
-						pages={Math.ceil(data.length / PAGESIZE)}
-						setPage={setPage}
-						sort={sort}
-						setSort={setSort}
-					/>
+					<ControlBar sort={sort} setSort={setSort} />
 				</CardActions>
-				<CardContent>
+				<CardContent id="content">
 					<>
 						<Header id="header" />
-						<List data={pageData} />
+						<div id="list">
+							<List data={data.sort(sortFunc)} />
+						</div>
 					</>
 				</CardContent>
 			</Card>

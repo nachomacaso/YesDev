@@ -1,39 +1,59 @@
 import React from 'react';
-import { formatCurrency } from './util/FormatUtil.js';
-export const Row = ({ item, id }) => (
-	<div id={id} className="row">
-		<div id="participant" className="column" title={item.PARTICIPANTFULLNAME}>
-			{item.PARTICIPANTFULLNAME}
+import { formatCurrency, formatMW } from './util/FormatUtil.js';
+import { getMinMax } from './util/DataUtil.js';
+import { getHue } from './util/ColorUtil.js';
+
+export const Row = ({ item, id, data }) => {
+	const minMaxProfit = getMinMax(data, 'PROFIT');
+	const minMaxCost = getMinMax(data, 'COST');
+	const minMaxRevenue = getMinMax(data, 'REVENUE');
+	return (
+		<div id={id} className="row">
+			<div id="participant" className="column" title={item.PARTICIPANTFULLNAME}>
+				{item.PARTICIPANTFULLNAME}
+			</div>
+			<div id="tradetype" className="column">
+				{item.TRADETYPE}
+			</div>
+			<div id="peaktype" className="column">
+				{item.PEAKTYPE}
+			</div>
+			<div id="hedgetype" className="column">
+				{item.HEDGETYPE}
+			</div>
+			<div id="source" className="column">
+				{item.SOURCENAME}
+			</div>
+			<div id="sink" className="column">
+				{item.SINKNAME}
+			</div>
+			<div id="size" className="column">
+				{formatMW(item.CONTRACTSIZE)}
+			</div>
+			<div
+				id="cost"
+				className="column"
+				style={{ backgroundColor: getHue(item.COST, minMaxCost.min, minMaxCost.max) }}
+			>
+				{formatCurrency(item.COST)}
+			</div>
+			<div
+				id="revenue"
+				className="column"
+				style={{ backgroundColor: getHue(item.REVENUE, minMaxRevenue.min, minMaxRevenue.max) }}
+			>
+				{formatCurrency(item.REVENUE)}
+			</div>
+			<div
+				id="profit"
+				className="column"
+				style={{ backgroundColor: getHue(item.PROFIT, minMaxProfit.min, minMaxProfit.max) }}
+			>
+				{formatCurrency(item.PROFIT)}
+			</div>
 		</div>
-		<div id="tradetype" className="column">
-			{item.TRADETYPE}
-		</div>
-		<div id="peaktype" className="column">
-			{item.PEAKTYPE}
-		</div>
-		<div id="hedgetype" className="column">
-			{item.HEDGETYPE}
-		</div>
-		<div id="source" className="column">
-			{item.SOURCENAME}
-		</div>
-		<div id="sink" className="column">
-			{item.SINKNAME}
-		</div>
-		<div id="size" className="column">
-			{item.CONTRACTSIZE}
-		</div>
-		<div id="cost" className="column">
-			{formatCurrency(item.COST)}
-		</div>
-		<div id="revenue" className="column">
-			{formatCurrency(item.REVENUE)}
-		</div>
-		<div id="profit" className="column">
-			{formatCurrency(item.PROFIT)}
-		</div>
-	</div>
-);
+	);
+};
 
 export const Header = ({ item, id }) => (
 	<div id={id} className="row">
