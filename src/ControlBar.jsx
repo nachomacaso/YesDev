@@ -1,25 +1,8 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import { Input, TextField, MenuItem, InputLabel, IconButton } from '@material-ui/core';
+import { Input, MenuItem, InputLabel } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import LastPageIcon from '@material-ui/icons/LastPage';
-export const ControlBar = ({ page, pages, setPage, sort, setSort }) => (
+export const ControlBar = ({ sort, setSort }) => (
 	<>
-		<IconButton title="First Page" size="small" onClick={() => setPage(1)}>
-			<FirstPageIcon />
-		</IconButton>
-		<TextField
-			title="Page Number"
-			type="number"
-			inputProps={{ min: 1, max: pages }}
-			value={page}
-			onChange={event => setPage(Number(event.target.value))}
-		/>
-		<Typography>of {pages}</Typography>
-		<IconButton title="Last Page" size="small" onClick={() => setPage(pages)}>
-			<LastPageIcon />
-		</IconButton>
 		<InputLabel htmlFor="sort">Sort&nbsp;&nbsp;</InputLabel>
 		<Select
 			title="Sort Field"

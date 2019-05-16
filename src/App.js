@@ -3,22 +3,22 @@ import './App.css';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import { interpolateHsl, quantize } from 'd3-interpolate';
 import { multiSort } from './util/SortUtil';
 import { Row, Header } from './Row';
 import { ControlBar } from './ControlBar';
 import { Spinner } from './Spinner';
 
-const PAGESIZE = 20;
-
-const List = ({ data }) => data.map((item, index) => <Row item={item} />);
+const List = ({ data, background, sort }) => data.map((item, index) => <Row key={index} item={item} color={background[index]} sort={sort.toLowerCase()} />);
 
 function App() {
 	const [data, setData] = useState([]);
-	const [loading, setLoading] = useState(false);
-	const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 	const [sort, setSort] = useState('CONTRACTSIZE,PARTICIPANTFULLNAME');
 	const sortFunc = multiSort(sort.split(','));
-	const pageData = data.sort(sortFunc).slice((page - 1) * PAGESIZE, page * PAGESIZE);
+  const pageData = data.sort(sortFunc);
+  const colors = quantize(interpolateHsl('red', 'green'), pageData.length);
+
 	useEffect(() => {
 		async function fetchData() {
 			setLoading(true);
@@ -34,9 +34,6 @@ function App() {
 			<Card id="table">
 				<CardActions id="controls">
 					<ControlBar
-						page={page}
-						pages={Math.ceil(data.length / PAGESIZE)}
-						setPage={setPage}
 						sort={sort}
 						setSort={setSort}
 					/>
@@ -44,7 +41,7 @@ function App() {
 				<CardContent>
 					<>
 						<Header id="header" />
-						<List data={pageData} />
+						<List data={pageData} background={colors} sort={sort} />
 					</>
 				</CardContent>
 			</Card>

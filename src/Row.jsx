@@ -1,6 +1,6 @@
 import React from 'react';
 import { formatCurrency } from './util/FormatUtil.js';
-export const Row = ({ item, id }) => (
+export const Row = ({ item, id, color, sort }) => (
 	<div id={id} className="row">
 		<div id="participant" className="column" title={item.PARTICIPANTFULLNAME}>
 			{item.PARTICIPANTFULLNAME}
@@ -23,13 +23,13 @@ export const Row = ({ item, id }) => (
 		<div id="size" className="column">
 			{item.CONTRACTSIZE}
 		</div>
-		<div id="cost" className="column">
+		<div id="cost" className="column" style={sort === 'cost' ? {background: color} : {background: 'none'} }>
 			{formatCurrency(item.COST)}
 		</div>
-		<div id="revenue" className="column">
+		<div id="revenue" className="column" style={sort === 'revenue' ? {background: color} : {background: 'none'} }>
 			{formatCurrency(item.REVENUE)}
 		</div>
-		<div id="profit" className="column">
+		<div id="profit" className="column" style={sort === 'profit' ? {background: color} : {background: 'none'} }>
 			{formatCurrency(item.PROFIT)}
 		</div>
 	</div>
