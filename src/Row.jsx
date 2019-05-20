@@ -1,12 +1,8 @@
 import React from 'react';
 import { formatCurrency, formatMW } from './util/FormatUtil.js';
-import { getMinMax } from './util/DataUtil.js';
 import { getHue } from './util/ColorUtil.js';
 
-export const Row = ({ item, id, data }) => {
-	const minMaxProfit = getMinMax(data, 'PROFIT');
-	const minMaxCost = getMinMax(data, 'COST');
-	const minMaxRevenue = getMinMax(data, 'REVENUE');
+export const Row = ({ item, id, minMax }) => {
 	return (
 		<div id={id} className="row">
 			<div id="participant" className="column" title={item.PARTICIPANTFULLNAME}>
@@ -33,21 +29,21 @@ export const Row = ({ item, id, data }) => {
 			<div
 				id="cost"
 				className="column"
-				style={{ backgroundColor: getHue(item.COST, minMaxCost.min, minMaxCost.max) }}
+				style={{ backgroundColor: getHue(item.COST, minMax.minCost, minMax.maxCost) }}
 			>
 				{formatCurrency(item.COST)}
 			</div>
 			<div
 				id="revenue"
 				className="column"
-				style={{ backgroundColor: getHue(item.REVENUE, minMaxRevenue.min, minMaxRevenue.max) }}
+				style={{ backgroundColor: getHue(item.REVENUE, minMax.minRev, minMax.maxRev) }}
 			>
 				{formatCurrency(item.REVENUE)}
 			</div>
 			<div
 				id="profit"
 				className="column"
-				style={{ backgroundColor: getHue(item.PROFIT, minMaxProfit.min, minMaxProfit.max) }}
+				style={{ backgroundColor: getHue(item.PROFIT, minMax.minProfit, minMax.maxProfit) }}
 			>
 				{formatCurrency(item.PROFIT)}
 			</div>

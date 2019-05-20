@@ -7,8 +7,9 @@ import { multiSort } from './util/SortUtil';
 import { Row, Header } from './Row';
 import { ControlBar } from './ControlBar';
 import { Spinner } from './Spinner';
+import { getMinMax } from './util/DataUtil.js';
 
-const List = ({ data }) => data.map((item, index) => <Row data={data} item={item} />);
+const List = ({ data, minMax }) => data.map((item, index) => <Row key={index} item={item} minMax={minMax}/>);
 
 function App() {
 	const [data, setData] = useState([]);
@@ -24,8 +25,10 @@ function App() {
 			setLoading(false);
 		}
 		fetchData();
-	}, []);
-	console.log(data.length);
+  }, []);
+  
+  const minMax = getMinMax(data);
+  
 	return (
 		<>
 			<Card id="table">
@@ -36,7 +39,7 @@ function App() {
 					<>
 						<Header id="header" />
 						<div id="list">
-							<List data={data.sort(sortFunc)} />
+							<List data={data.sort(sortFunc)} minMax={minMax}/>
 						</div>
 					</>
 				</CardContent>
