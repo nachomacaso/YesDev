@@ -1,10 +1,8 @@
 import React from 'react';
 import { Input, MenuItem, InputLabel } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import LastPageIcon from '@material-ui/icons/LastPage';
 
-export const ControlBar = ({ page, pages, setPage, sort, setSort }) => (
+export const ControlBar = ({ sort, setSort }) => (
 	<>
 		<InputLabel htmlFor="sort">Sort&nbsp;&nbsp;</InputLabel>
 		<Select
