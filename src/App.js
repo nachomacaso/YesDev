@@ -3,7 +3,6 @@ import './App.css';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import { interpolateHsl, quantize } from 'd3-interpolate';
 import { multiSort } from './util/SortUtil';
 import { Row, Header } from './Row';
 import { ControlBar } from './ControlBar';
